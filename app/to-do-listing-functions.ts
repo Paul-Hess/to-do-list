@@ -13,16 +13,40 @@ module ToDoList {
   }
 
   export var listAllTasksOfType = function (tasks: Task[]) : Task[] {
-    var typeTask: Task[] = [];
+    var typeArray = [];
+    var hobbyArray: Task[] = [];
+    var workArray: Task[] = [];
+    var homeArray: Task[] = [];
     for (var task of tasks) {
-      console.log(task);
       if (task instanceof HobbyTask) {
-        typeTask.push(task);
-      } else {
-        console.log("didnt work");
+        hobbyArray.push(task);
+      } else if (task instanceof WorkTask) {
+        workArray.push(task);
+      } else if (task instanceof HomeTask) {
+        homeArray.push(task);
       }
     }
-    console.log(typeTask);
-    return typeTask;
+    typeArray.push(hobbyArray, workArray, homeArray);
+    return typeArray;
+  }
+
+  export var listPriorities = function(tasks: Task[], priority: string): String[] {
+    var priorityArray: String[] = [];
+    for (var task of tasks) {
+      if (task.priority === priority) {
+        priorityArray.push(task.description);
+      }
+    }
+    return priorityArray;
+  }
+
+  export var nextPriority = function(assignee: IPerson, tasks: Task[]): string {
+    var assignedTasks: Task[] = [];
+    for( var task of tasks) {
+      if ((task.assignedTo === assignee) && (task.priority === "High")) {
+        assignedTasks.push(task);
+      }
+    }
+    return assignedTasks[0].description;
   }
 }

@@ -19,6 +19,7 @@ tomorrow.setDate(today.getDate() + 1);
 var nextDay = new Date();
 nextDay.setDate(today.getDate() + 2);
 
+tasks.push(new ToDoList.WorkTask(today, "Test Task.", "High", people.diane));
 tasks.push(new ToDoList.WorkTask(today, "Update blog.", "High", people.diane));
 tasks.push(new ToDoList.WorkTask(tomorrow, "Go to meeting.", "Medium", people.thor));
 tasks.push(new ToDoList.WorkTask(nextDay, "Clean ceiling.", "Low", people.loki));
@@ -31,4 +32,12 @@ for(var task of thorTasks) {
 }
 
 
-ToDoList.listAllTasksOfType(tasks);
+var typeArray = ToDoList.listAllTasksOfType(tasks);
+
+var priorityArray = ToDoList.listPriorities(tasks, "High");
+
+var nextPriority = ToDoList.nextPriority(people.diane, tasks);
+
+console.log(nextPriority);
+
+// console.log(typeArray[0][0].description);
